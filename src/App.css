@@ -1,34 +1,55 @@
-/* App.css — минимальный файл после удаления Syncfusion */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
 
-.tooltip-content {
-  background-color: #212121;          /* дефолтный Material тёмный фон Syncfusion */
-  color: white;
-  font-size: 12px;                    /* типичный размер в EJ2 Tooltip */
-  padding: 6px 12px;
-  border-radius: 4px;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4); /* лёгкая тень как в Material */
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-  z-index: 1500;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
-.tooltip-arrow {
-  fill: #212121;
+/* sidebar */
+.sidebar {
+  box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
 }
 
-/* Если хочешь круглый тултип (как ты упоминал ранее) — используй этот класс вместо tooltip-content */
-.tooltip-round {
-  background-color: #212121;
-  color: white;
-  font-size: 13px;
-  padding: 8px 16px;
-  border-radius: 9999px;              /* border-radius: 50% */
-  min-width: 80px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+/* navbar layering */
+.nav-item,
+.navbar {
+  z-index: 10000;
 }
 
-.tooltip-round .tooltip-arrow {
-  fill: #212121;
+/* mobile sidebar */
+@media screen and (max-width: 800px) {
+  .sidebar {
+    z-index: 10000000;
+  }
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(216, 216, 216);
+  border-radius: 40px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* tooltip animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.15s ease-in-out;
 }
