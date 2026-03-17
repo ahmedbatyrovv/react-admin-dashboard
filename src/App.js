@@ -23,7 +23,7 @@ import {
   Area,
   Bar,
   Pie,
-} from "./pages/Charts/index";
+} from "./pages/index";
 
 import "./App.css";
 
@@ -35,15 +35,15 @@ const App = () => {
       <div className="flex relative dark:bg-main-dark-bg">
         {/* SETTINGS BUTTON */}
         <div className="fixed right-4 bottom-4 z-50">
-          <Tooltip content="Settings">
-            <button
-              type="button"
-              className="text-3xl p-3 text-white rounded-full shadow-lg hover:shadow-xl transition"
-              style={{ background: "#2563EB" }}
-            >
-              <FiSettings />
-            </button>
-          </Tooltip>
+         <Tooltip content="Settings">
+  <button
+    type="button"
+    className="text-3xl p-4 text-white rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110"
+    style={{ background: "linear-gradient(135deg, #3b82f6, #2563eb)" }}
+  >
+    <FiSettings />
+  </button>
+</Tooltip>
         </div>
 
         {/* SIDEBAR */}
