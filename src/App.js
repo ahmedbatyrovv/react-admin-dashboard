@@ -23,7 +23,7 @@ import {
   Area,
   Bar,
   Pie,
-} from "./pages";
+} from "./pages/Charts/index";
 
 import "./App.css";
 
