@@ -8,7 +8,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import avatar from "../data/avatar.jpg";
 import { Cart, Chat, Notification, UserProfile } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
-const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
+const NavButton = ({ title, customFunc, icon, color, dotColor }) =>
   <TooltipComponent content={title} position="BottomCenter">
     <button
       type="button"
@@ -23,16 +23,41 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
         {icon}
       </span>
     </button>
-  </TooltipComponent>
-);
+  </TooltipComponent>;
 
 const Navbar = () => {
-  const { activeMenu, setActiveMenu } = useStateContext();
+  const {
+    activeMenu,
+    setActiveMenu,
+    isClicked,
+    setIsClicked,
+    handleClick,
+    screenSize,
+    setScreenSize
+  } = useStateContext();
+
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => wiindow.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(
+    () => {
+      if (screenSize <= 900) setActiveMenu(false);
+      else setActiveMenu(true);
+    },
+    [screenSize]
+  );
   return (
     <div className="flex justify-center p-2 md:mx-6 relative">
       <NavButton
         title="Menu"
-        customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)}
+        customFunc={() => setActiveMenu(prevActiveMenu => !prevActiveMenu)}
         color="blue"
         icon={<AiOutlineMenu />}
       />
@@ -73,6 +98,11 @@ const Navbar = () => {
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </TooltipComponent>
+
+        {isClicked.cart && <Cart />}
+        {isClicked.chat && <Chat />}
+        {isClicked.notification && <Notification />}
+        {isClicked.userProfile && <UserProfile />}
       </div>
     </div>
   );
