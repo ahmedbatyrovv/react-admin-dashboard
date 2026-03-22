@@ -1,126 +1,130 @@
 import React from "react";
-import { BsCurrencyDollar } from "react-icons/bs";
-import { GoPrimitiveDot } from "react-icons/go";
+import { GoDotFill } from "react-icons/go";
 
-import { Stacked, Pie, Button, SparkLine } from "../components";
-import {
-  earningData,
-  SparklineAreaData,
-  ecomPieChartData
-} from "../data/dummy";
-import { useStateContext } from "../contexts/ContextProvider";
+import { Stacked, Button, SparkLine } from "../components";
+import { earningData, SparklineAreaData } from "../data/dummy";
 
 const Ecommerce = () => {
   return (
-    <div className="mt-12">
-      <div className="flex flex-wrap lg:flex-nowrap justify-center">
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="font-bold text-gray-400">Earnings</p>
-              <p className="text-2xl">$75,450.50</p>
-            </div>
-          </div>
+    <div className="mt-10 px-4">
+      {/* TOP SECTION */}
+      <div className="flex flex-wrap lg:flex-nowrap gap-6">
+        {/* EARNINGS CARD */}
+        <div className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl p-6 shadow-lg">
+          <p className="text-sm opacity-80">Total Earnings</p>
+          <h2 className="text-3xl font-bold mt-2">$75,450</h2>
+
           <div className="mt-6">
             <Button
-              color="white"
-              bgColor="blue"
-              text="Download"
-              borderRadius="10px"
-              size="md"
+              color="#2563eb"
+              bgColor="#fff"
+              text="Download Report"
+              borderRadius="9999px"
             />
           </div>
         </div>
 
-        <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
+        {/* SMALL CARDS */}
+        <div className="flex flex-wrap gap-4 flex-1 justify-center">
           {earningData.map(item =>
             <div
               key={item.title}
-              className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56 p-4 pt-9 rounded-2xl"
+              className="bg-white dark:bg-secondary-dark-bg dark:text-gray-200 w-[160px] p-4 rounded-2xl shadow-sm hover:shadow-md transition-all"
             >
-              <button
-                type="button"
-                style={{ color: item.iconColor, backgroundColor: item.iconBg }}
-                className="text-2xl opacity-0.9 rounded-full p-4 hover:drop-shadow-xl"
+              <div
+                className="p-3 rounded-xl w-fit"
+                style={{
+                  backgroundColor: item.iconBg,
+                  color: item.iconColor
+                }}
               >
                 {item.icon}
-              </button>
-              <p className="mt-3">
-                <span className="text-lg font-semibold">
-                  {item.amount}
-                </span>
-                <span className={`text-sm text-${item.pcColor} ml-2`}>
-                  {item.percentage}
-                </span>
+              </div>
+
+              <p className="mt-4 text-lg font-semibold">
+                {item.amount}
               </p>
-              <p className="text-sm text-gray-400 mt-1">
+
+              <p className="text-xs text-gray-400">
                 {item.title}
+              </p>
+
+              <p
+                className={`text-xs mt-1 ${item.pcColor === "green"
+                  ? "text-green-500"
+                  : "text-red-500"}`}
+              >
+                {item.percentage}
               </p>
             </div>
           )}
         </div>
       </div>
 
-      <div className="flex gap-10 flex-wrap justify-center">
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-780 ">
-          <div className="flex justify-between">
-            <p className="font-semibold text-xl">Revenue Updates</p>
-            <div className="flex items-center gap-4">
-              <p className="flex items-center gap-2 text-gray-600 hover:drop-shadow-xl">
-                <span>
-                  <GoPrimitiveDot />
-                </span>
-                <span>Expense</span>
-              </p>
-              <p className="flex items-center gap-2 text-green-400 hover:drop-shadow-xl">
-                <span>
-                  <GoPrimitiveDot />
-                </span>
-                <span>Budget</span>
-              </p>
+      {/* REVENUE SECTION */}
+      <div className="mt-8 bg-white dark:bg-secondary-dark-bg dark:text-gray-200 rounded-2xl p-6 shadow-sm">
+        {/* HEADER */}
+        <div className="flex justify-between items-center flex-wrap gap-4">
+          <h3 className="text-lg font-semibold">Revenue Overview</h3>
+
+          <div className="flex gap-4">
+            <div className="flex items-center gap-1 text-gray-500 text-sm">
+              <GoDotFill className="text-gray-400" />
+              Expense
+            </div>
+
+            <div className="flex items-center gap-1 text-sm">
+              <GoDotFill className="text-blue-500" />
+              Budget
             </div>
           </div>
-          <div className="mt-10 flex gap-10 flex-wrap justify-center">
-            <div className="border-r-1 border-color m-4 pr-10">
-              <div>
-                <p>
-                  <span className="text-3xl font-semibold">$95,445</span>
-                  <span className="p-1.5 hover:drop-shadow-xl cursor-pointer rounded-full text-white bg-green-400 ml-3 text-xs">
-                    23%
-                  </span>
-                </p>
-                <p className="text-gray-500 mt-1">Budget</p>
-              </div>
-              <div className="mt-8">
-                <p>
-                  <span className="text-3xl font-semibold">$50,475</span>
-                </p>
-                <p className="text-gray-500 mt-1">Expense</p>
-              </div>
+        </div>
 
-              <div className="mt-5">
-                <SparkLine
-                  currentColor="blue"
-                  id="line-sparkline"
-                  type="line"
-                  height="80px"
-                  width="250px"
-                  data={SparklineAreaData}
-                  color="blue"
-                />
-              </div>
-              <div className="mt-10">
-                <Button
-                  color="white"
-                  bgColor="blue"
-                  text="Download Report"
-                  borderRadius="10px"
-                />
-              </div>
-            </div>
+        {/* CONTENT */}
+        <div className="mt-8 flex flex-wrap lg:flex-nowrap gap-10">
+          {/* LEFT SIDE */}
+          <div className="flex-1">
+            {/* NUMBERS */}
             <div>
-              <Stacked width="320px" height="360px" />
+              <div className="flex items-center gap-2">
+                <h2 className="text-3xl font-bold">$95,445</h2>
+                <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                  +23%
+                </span>
+              </div>
+              <p className="text-gray-400 text-sm">Budget</p>
             </div>
+
+            <div className="mt-6">
+              <h2 className="text-3xl font-bold">$50,475</h2>
+              <p className="text-gray-400 text-sm">Expense</p>
+            </div>
+
+            {/* 🔥 SPARKLINE */}
+            <div className="mt-6 bg-gray-50 dark:bg-gray-800 p-3 rounded-xl">
+              <SparkLine
+                type="Area"
+                height={90}
+                width="100%"
+                data={SparklineAreaData}
+                color="#93c5fd"
+                currentColor="#2563eb"
+              />
+            </div>
+
+            <div className="mt-6">
+              <Button
+                color="white"
+                bgColor="#2563eb"
+                text="Download Report"
+                borderRadius="9999px"
+              />
+            </div>
+          </div>
+
+          {/* RIGHT SIDE CHART */}
+          <div className="flex-1 flex justify-center">
+            <Stacked width="100%" height={350} />
           </div>
         </div>
       </div>

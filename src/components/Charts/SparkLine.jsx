@@ -1,60 +1,28 @@
 import React from "react";
-import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  LineChart,
-  Line,
-  Tooltip
-} from "recharts";
+import { ResponsiveContainer, AreaChart, Area, Tooltip } from "recharts";
 
-const SparkLine = ({ height, width, color, data, type, currentColor }) => {
-  // Syncfusion data → Recharts format
-  const formattedData = data.map(item => ({
-    x: item.x,
-    y: item.y
-  }));
-
+const SparkLine = ({ height, width, data, color, currentColor }) => {
   return (
-    <ResponsiveContainer width={width || "100%"} height={height}>
-      {type === "Line"
-        ? <LineChart data={formattedData}>
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "#1f2937",
-                border: "none",
-                borderRadius: "8px",
-                color: "#fff"
-              }}
-              labelStyle={{ color: "#9ca3af" }}
-            />
-            <Line
-              type="monotone"
-              dataKey="y"
-              stroke={currentColor || color}
-              strokeWidth={2}
-              dot={false}
-            />
-          </LineChart>
-        : <AreaChart data={formattedData}>
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "#1f2937",
-                border: "none",
-                borderRadius: "8px",
-                color: "#fff"
-              }}
-              labelStyle={{ color: "#9ca3af" }}
-            />
-            <Area
-              type="monotone"
-              dataKey="y"
-              stroke={currentColor || color}
-              fill={color}
-              strokeWidth={2}
-              dot={false}
-            />
-          </AreaChart>}
+    <ResponsiveContainer width={width} height={height}>
+      <AreaChart data={data}>
+        <defs>
+          <linearGradient id="spark" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor={currentColor} stopOpacity={0.8} />
+            <stop offset="95%" stopColor={currentColor} stopOpacity={0} />
+          </linearGradient>
+        </defs>
+
+        <Tooltip />
+
+        <Area
+          type="monotone"
+          dataKey="y"
+          stroke={currentColor}
+          fill="url(#spark)"
+          strokeWidth={2}
+          dot={false}
+        />
+      </AreaChart>
     </ResponsiveContainer>
   );
 };
