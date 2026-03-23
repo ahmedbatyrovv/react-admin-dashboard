@@ -10,7 +10,7 @@ const Ecommerce = () => {
       {/* TOP SECTION */}
       <div className="flex flex-wrap lg:flex-nowrap gap-6">
         {/* EARNINGS CARD */}
-        <div className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl p-6 shadow-lg">
+        <div className="flex-1 bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 text-white rounded-2xl p-6 shadow-xl">
           <p className="text-sm opacity-80">Total Earnings</p>
           <h2 className="text-3xl font-bold mt-2">$75,450</h2>
 
@@ -29,7 +29,7 @@ const Ecommerce = () => {
           {earningData.map(item =>
             <div
               key={item.title}
-              className="bg-white dark:bg-secondary-dark-bg dark:text-gray-200 w-[160px] p-4 rounded-2xl shadow-sm hover:shadow-md transition-all"
+              className="bg-white dark:bg-[#1E293B] dark:text-gray-200 w-[160px] p-4 rounded-2xl shadow-sm hover:shadow-md transition"
             >
               <div
                 className="p-3 rounded-xl w-fit"
@@ -62,14 +62,14 @@ const Ecommerce = () => {
       </div>
 
       {/* REVENUE SECTION */}
-      <div className="mt-8 bg-white dark:bg-secondary-dark-bg dark:text-gray-200 rounded-2xl p-6 shadow-sm">
+      <div className="mt-8 bg-white dark:bg-[#1E293B] dark:text-gray-200 rounded-2xl p-6 shadow-sm">
         {/* HEADER */}
         <div className="flex justify-between items-center flex-wrap gap-4">
           <h3 className="text-lg font-semibold">Revenue Overview</h3>
 
           <div className="flex gap-4">
-            <div className="flex items-center gap-1 text-gray-500 text-sm">
-              <GoDotFill className="text-gray-400" />
+            <div className="flex items-center gap-1 text-sm text-gray-500">
+              <GoDotFill className="text-purple-500" />
               Expense
             </div>
 
@@ -82,9 +82,8 @@ const Ecommerce = () => {
 
         {/* CONTENT */}
         <div className="mt-8 flex flex-wrap lg:flex-nowrap gap-10">
-          {/* LEFT SIDE */}
+          {/* LEFT */}
           <div className="flex-1">
-            {/* NUMBERS */}
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-3xl font-bold">$95,445</h2>
@@ -100,16 +99,9 @@ const Ecommerce = () => {
               <p className="text-gray-400 text-sm">Expense</p>
             </div>
 
-            {/* 🔥 SPARKLINE */}
-            <div className="mt-6 bg-gray-50 dark:bg-gray-800 p-3 rounded-xl">
-              <SparkLine
-                type="Area"
-                height={90}
-                width="100%"
-                data={SparklineAreaData}
-                color="#93c5fd"
-                currentColor="#2563eb"
-              />
+            {/* SPARKLINE */}
+            <div className="mt-6 bg-gray-50 dark:bg-[#0F172A] p-3 rounded-xl shadow-inner">
+              <SparkLine data={SparklineAreaData} />
             </div>
 
             <div className="mt-6">
@@ -122,7 +114,7 @@ const Ecommerce = () => {
             </div>
           </div>
 
-          {/* RIGHT SIDE CHART */}
+          {/* RIGHT CHART */}
           <div className="flex-1 flex justify-center">
             <Stacked width="100%" height={350} />
           </div>

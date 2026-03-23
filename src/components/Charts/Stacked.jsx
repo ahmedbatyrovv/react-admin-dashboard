@@ -12,26 +12,31 @@ import {
 import { stackedCustomSeries } from "../../data/dummy";
 
 const Stacked = ({ width = "100%", height = 300 }) => {
-  // 🔥 Convert Syncfusion → Recharts data
   const data = stackedCustomSeries[0]?.dataSource || [];
 
   return (
     <div style={{ width, height }}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer>
         <BarChart data={data}>
-
-          {/* X AXIS */}
-          <XAxis dataKey="x" tick={{ fontSize: 12 }} />
-
-          {/* Y AXIS */}
-          <YAxis tick={{ fontSize: 12 }} />
+          {/* AXIS */}
+          <XAxis
+            dataKey="x"
+            tick={{ fill: "#6B7280", fontSize: 12 }}
+            axisLine={false}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fill: "#6B7280", fontSize: 12 }}
+            axisLine={false}
+            tickLine={false}
+          />
 
           {/* TOOLTIP */}
           <Tooltip
             contentStyle={{
-              backgroundColor: "#1f2937",
+              backgroundColor: "#111827",
               border: "none",
-              borderRadius: "8px",
+              borderRadius: "10px",
               color: "#fff",
             }}
           />
@@ -39,17 +44,16 @@ const Stacked = ({ width = "100%", height = 300 }) => {
           {/* LEGEND */}
           <Legend />
 
-          {/* 🔥 STACKED BARS */}
+          {/* STACKED BARS */}
           {stackedCustomSeries.map((item, index) => (
             <Bar
               key={index}
               dataKey={item.yName}
               stackId="a"
-              fill={item.fill || item.color}
-              radius={[6, 6, 0, 0]}
+              fill={item.fill}
+              radius={[10, 10, 0, 0]}
             />
           ))}
-
         </BarChart>
       </ResponsiveContainer>
     </div>

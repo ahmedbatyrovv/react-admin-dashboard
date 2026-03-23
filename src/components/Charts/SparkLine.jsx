@@ -1,29 +1,28 @@
 import React from "react";
-import { ResponsiveContainer, AreaChart, Area, Tooltip } from "recharts";
+import { ResponsiveContainer, AreaChart, Area } from "recharts";
 
-const SparkLine = ({ height, width, data, color, currentColor }) => {
+const SparkLine = ({ data }) => {
   return (
-    <ResponsiveContainer width={width} height={height}>
-      <AreaChart data={data}>
-        <defs>
-          <linearGradient id="spark" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor={currentColor} stopOpacity={0.8} />
-            <stop offset="95%" stopColor={currentColor} stopOpacity={0} />
-          </linearGradient>
-        </defs>
+    <div style={{ width: "100%", height: 90 }}>
+      <ResponsiveContainer>
+        <AreaChart data={data}>
+          <defs>
+            <linearGradient id="sparkGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.6} />
+              <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
+            </linearGradient>
+          </defs>
 
-        <Tooltip />
-
-        <Area
-          type="monotone"
-          dataKey="y"
-          stroke={currentColor}
-          fill="url(#spark)"
-          strokeWidth={2}
-          dot={false}
-        />
-      </AreaChart>
-    </ResponsiveContainer>
+          <Area
+            type="monotone"
+            dataKey="y"
+            stroke="#3B82F6"
+            strokeWidth={2}
+            fill="url(#sparkGradient)"
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
