@@ -1,8 +1,39 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import '@fontsource/orbitron/400.css';
+@import '@fontsource/orbitron/700.css';
+
+/* MUI + Tailwind konfliktlerini çözmek we 3D effekt goşmak */
+@layer utilities {
+  .neon-grid {
+    box-shadow: 0 0 60px rgba(0, 255, 204, 0.6),
+      0 25px 50px -12px rgb(0 0 0 / 0.7);
+  }
+
+  .neon-frame {
+    box-shadow: 0 0 50px rgba(0, 255, 204, 0.5),
+      inset 0 0 60px rgba(255, 0, 255, 0.2);
+  }
+}
+
+/* Scrollbar neon stil */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#00ffcc, #ff00ff);
+  border-radius: 9999px;
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a3a;
+}
 
 body {
   margin: 0;
