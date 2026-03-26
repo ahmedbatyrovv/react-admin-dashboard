@@ -1,6 +1,8 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
+import "@fontsource/orbitron/400.css";
+import "@fontsource/orbitron/700.css";
 
 const columns = [
   { field: "id", headerName: "ID", width: 80 },
@@ -19,15 +21,22 @@ const columns = [
     headerName: "Maaş ($)",
     type: "number",
     width: 160,
-    editable: true
+    editable: true,
+    // Howpsuz valueFormatter
+    valueFormatter: value => {
+      if (value == null) return "$0";
+      return `$${Number(value).toLocaleString()}`;
+    }
   },
   {
     field: "startDate",
     headerName: "Işe başlan senesi",
     type: "date",
     width: 180,
-    valueFormatter: params =>
-      params.value ? new Date(params.value).toLocaleDateString("tr-TR") : ""
+    valueFormatter: value => {
+      if (!value) return "";
+      return new Date(value).toLocaleDateString("tr-TR");
+    }
   }
 ];
 
@@ -112,6 +121,15 @@ const rows = [
     age: 27,
     salary: 1920,
     startDate: "2023-10-01"
+  },
+  {
+    id: 10,
+    name: "Batyr Amanow",
+    position: "DevOps Engineer",
+    department: "IT",
+    age: 33,
+    salary: 2750,
+    startDate: "2021-07-15"
   }
 ];
 
@@ -119,43 +137,47 @@ export default function Employees() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a1f] via-[#1a0033] to-[#0a0a1f] flex items-center justify-center p-6 relative overflow-hidden">
       {/* Neon çarçywa */}
-      <div className="absolute inset-6 border-2 border-cyan-400/30 rounded-3xl neon-frame pointer-events-none" />
+      <div className="absolute inset-8 border-2 border-cyan-400/30 rounded-3xl shadow-[0_0_60px_#00ffcc,inset_0_0_70px_#ff00ff30] pointer-events-none" />
 
       <Box className="w-full max-w-7xl z-10">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white tracking-widest font-orbitron">
-            EMPLOYEES DASHBOARD
+        <div className="text-center mb-10">
+          <h1 className="text-5xl font-bold text-white tracking-[4px] font-orbitron">
+            EMPLOYEES
           </h1>
-          <p className="text-cyan-300 text-lg mt-2">3D Neon Futuristic Table</p>
+          <p className="text-cyan-300 text-xl mt-3">
+            3D Neon Futuristic Dashboard
+          </p>
         </div>
 
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSizeOptions={[5, 8, 10, 20]}
+          pageSizeOptions={[5, 8, 10, 15, 20]}
           initialState={{
-            pagination: { paginationModel: { pageSize: 8 } }
+            pagination: { paginationModel: { pageSize: 10 } }
           }}
           checkboxSelection
           disableRowSelectionOnClick
-          className="neon-grid border-none rounded-3xl overflow-hidden bg-[#12122b] text-white"
+          className="border-none rounded-3xl overflow-hidden shadow-2xl shadow-cyan-500/60 bg-[#12122b] text-white"
           slotProps={{
             toolbar: {
               className: "bg-[#1a1a3a] border-b-2 border-fuchsia-500 p-4"
             }
           }}
           sx={{
+            height: 680,
+
             "& .MuiDataGrid-columnHeaders": {
               background: "linear-gradient(180deg, #1f1f45, #2a2a5e)",
-              borderBottom: "3px solid #00ffcc",
-              boxShadow: "0 10px 25px rgba(0, 255, 204, 0.4)"
+              borderBottom: "4px solid #00ffcc",
+              boxShadow: "0 15px 30px rgba(0, 255, 204, 0.4)"
             },
             "& .MuiDataGrid-columnHeader": {
               color: "#ffffff",
               fontWeight: 700,
-              fontSize: "1.1rem",
+              fontSize: "1.15rem",
               textTransform: "uppercase",
-              letterSpacing: "1.5px"
+              letterSpacing: "2px"
             },
             "& .MuiDataGrid-row": {
               backgroundColor: "rgba(18, 18, 43, 0.92)",
@@ -163,16 +185,17 @@ export default function Employees() {
             },
             "& .MuiDataGrid-row:hover": {
               backgroundColor: "rgba(42, 42, 94, 0.95)",
-              transform: "translateY(-4px) scale(1.02)",
-              boxShadow: "0 20px 45px rgba(0, 255, 204, 0.4)"
+              transform: "translateY(-5px) scale(1.02)",
+              boxShadow: "0 25px 50px rgba(0, 255, 204, 0.45)"
             },
             "& .MuiDataGrid-cell": {
               color: "#e0e0ff",
-              borderColor: "rgba(0, 255, 204, 0.18)"
+              borderColor: "rgba(0, 255, 204, 0.2)",
+              fontSize: "1.02rem"
             },
             "& .MuiDataGrid-footerContainer": {
               backgroundColor: "#1a1a3a",
-              borderTop: "2px solid #00ffcc"
+              borderTop: "3px solid #00ffcc"
             }
           }}
         />
@@ -180,4 +203,3 @@ export default function Employees() {
     </div>
   );
 }
-s;
