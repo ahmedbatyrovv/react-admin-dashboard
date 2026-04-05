@@ -3,92 +3,87 @@ import { DataGrid } from "@mui/x-data-grid";
 
 const Orders = () => {
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-
-    { field: "customer", headerName: "Customer", width: 180 },
-
+    {
+      field: "id",
+      headerName: "ID",
+      width: 80,
+    },
+    {
+      field: "customer",
+      headerName: "Customer",
+      flex: 1,
+      renderCell: (params) => (
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
+            {params.value[0]}
+          </div>
+          <span className="font-medium">{params.value}</span>
+        </div>
+      ),
+    },
     {
       field: "status",
       headerName: "Status",
-      width: 130,
+      flex: 1,
       renderCell: (params) => (
         <span
-          className={`px-2 py-1 rounded-full text-xs font-semibold ${
+          className={`px-3 py-1 rounded-full text-xs font-semibold ${
             params.value === "completed"
               ? "bg-green-100 text-green-600"
-              : "bg-red-100 text-red-600"
+              : "bg-yellow-100 text-yellow-600"
           }`}
         >
           {params.value}
         </span>
       ),
     },
-
     {
       field: "amount",
       headerName: "Amount",
-      width: 130,
+      flex: 1,
       valueFormatter: (params) =>
         params?.value ? `$${params.value}` : "$0",
     },
-
     {
       field: "OrderDate",
-      headerName: "Order Date",
-      width: 180,
+      headerName: "Date",
+      flex: 1,
       type: "date",
-
-      // 🔥 FIX DATE HERE
-      valueGetter: (params) => {
-        if (!params.value) return null;
-        return new Date(params.value);
-      },
-
-      // 🔥 SAFE FORMATTER
-      valueFormatter: (params) => {
-        if (!params?.value) return "-";
-        return params.value.toLocaleDateString();
-      },
+      valueGetter: (params) =>
+        params.value ? new Date(params.value) : null,
+      valueFormatter: (params) =>
+        params?.value ? params.value.toLocaleDateString() : "-",
     },
   ];
 
   const rows = [
-    {
-      id: 1,
-      customer: "Ahmed",
-      status: "completed",
-      amount: 120,
-      OrderDate: "2024-03-12",
-    },
-    {
-      id: 2,
-      customer: "John",
-      status: "pending",
-      amount: 80,
-      OrderDate: "2024-02-05",
-    },
-    {
-      id: 3,
-      customer: "Sara",
-      status: "completed",
-      amount: 250,
-      OrderDate: "2024-01-22",
-    },
+    { id: 1, customer: "Ahmed", status: "completed", amount: 120, OrderDate: "2024-03-12" },
+    { id: 2, customer: "John", status: "pending", amount: 80, OrderDate: "2024-02-05" },
+    { id: 3, customer: "Sara", status: "completed", amount: 250, OrderDate: "2024-01-22" },
   ];
 
   return (
     <div className="p-6">
-      <div className="bg-white dark:bg-secondary-dark-bg p-4 rounded-2xl shadow">
-        <h2 className="text-xl font-semibold mb-4">Orders</h2>
+      <div className="bg-white dark:bg-secondary-dark-bg rounded-2xl shadow-sm p-4">
+        <h2 className="text-lg font-semibold mb-4">Orders Overview</h2>
 
-        <div style={{ height: 400, width: "100%" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-        </div>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          disableSelectionOnClick
+          sx={{
+            border: "none",
+            "& .MuiDataGrid-columnHeaders": {
+              backgroundColor: "#f9fafb",
+              fontWeight: "600",
+            },
+            "& .MuiDataGrid-row": {
+              borderBottom: "1px solid #f1f5f9",
+            },
+          }}
+        />
       </div>
     </div>
   );
