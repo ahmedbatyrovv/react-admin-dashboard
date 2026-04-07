@@ -94,6 +94,7 @@ const Ecommerce = () => {
             </div>
 
             {/* 🔥 MUI SPARKLINE */}
+{/*helloworld*/}
             <div className="mt-6 bg-gray-50 dark:bg-[#0F172A] p-3 rounded-xl">
               <SparkLine data={SparklineAreaData} />
             </div>
